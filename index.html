@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I'm Sorry 💔</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 400px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 32px;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+    .emoji {
+      font-size: 50px;
+      animation: shake 1s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    button {
+      background: #ff4d6d;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #e60039;
+      transform: scale(1.05);
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts"></div>
+
+<div class="card">
+  <div class="emoji">🥺</div>
+  <h1>I'm Really Sorry</h1>
+  <p>I didn't mean to hurt you... Please forgive me ❤️</p>
+  <button onclick="forgiveMe()">Forgive Me?</button>
+</div>
+
+<script>
+  function forgiveMe() {
+    alert("Yay! Thank you 😭❤️ You're the best!");
+  }
+
+  // Generate floating hearts
+  const heartsContainer = document.querySelector('.hearts');
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+</script>
+
+</body>
+</html>
