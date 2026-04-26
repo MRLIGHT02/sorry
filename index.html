@@ -2,129 +2,528 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>I'm Sorry 💔</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Sorry, My Friend | A Sincere Apology</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Comic Sans MS', cursive;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+      background: linear-gradient(145deg, #fbc2c2 0%, #f08e8e 100%);
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
+    /* apology card main container */
+    .apology-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(2px);
+      border-radius: 56px;
+      padding: 2rem 2rem 2.8rem;
+      max-width: 540px;
+      width: 100%;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      max-width: 400px;
-      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 245, 245, 0.6) inset;
+      transition: all 0.3s ease;
+      animation: gentleRise 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      z-index: 10;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    @keyframes gentleRise {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* emotional bear / emoji area */
+    .mood-icon {
+      font-size: 75px;
+      filter: drop-shadow(2px 6px 12px rgba(0, 0, 0, 0.15));
+      margin-bottom: 8px;
+      display: inline-block;
+      animation: sadWobble 2s infinite ease;
+    }
+
+    @keyframes sadWobble {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      25% { transform: rotate(2deg) translateY(-3px); }
+      75% { transform: rotate(-2deg) translateY(2px); }
     }
 
     h1 {
-      color: #ff4d6d;
-      font-size: 32px;
+      font-size: 2.6rem;
+      color: #b13e3e;
+      margin: 10px 0 12px;
+      letter-spacing: -0.5px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #a13a3a, #d15454);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: none;
     }
 
-    p {
-      color: #555;
-      font-size: 18px;
-      margin: 20px 0;
+    .apology-message {
+      background: #fff6f0;
+      border-radius: 42px;
+      padding: 20px 20px;
+      margin: 18px 0;
+      text-align: left;
+      box-shadow: inset 0 1px 4px #ffcdcd, 0 6px 12px rgba(0, 0, 0, 0.03);
     }
 
-    .emoji {
-      font-size: 50px;
-      animation: shake 1s infinite;
+    .apology-message p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #4a2e2e;
+      margin-bottom: 16px;
+      font-weight: 500;
     }
 
-    @keyframes shake {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(5deg); }
-      50% { transform: rotate(-5deg); }
-      75% { transform: rotate(5deg); }
-      100% { transform: rotate(0deg); }
-    }
-
-    button {
-      background: #ff4d6d;
-      border: none;
-      color: white;
+    .behavior-list {
+      background: #fce9e9;
+      border-radius: 28px;
       padding: 12px 20px;
-      border-radius: 25px;
-      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .behavior-list li {
+      list-style-type: none;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1rem;
+      color: #5c3b3b;
+      font-weight: 500;
+    }
+
+    .behavior-list li span {
+      font-size: 1.5rem;
+    }
+
+    .promise-text {
+      font-size: 1.05rem;
+      font-style: italic;
+      background: #ffe0d0;
+      padding: 14px 16px;
+      border-radius: 50px;
+      margin: 18px 0 8px;
+      color: #b14b4b;
+      font-weight: 600;
+      border-left: 6px solid #ff8a8a;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 28px 0 12px;
+    }
+
+    .forgive-btn {
+      background: #e66c6c;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      border-radius: 50px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.25s;
+      box-shadow: 0 5px 0 #8f3f3f;
+      font-family: inherit;
     }
 
-    button:hover {
-      background: #e60039;
-      transform: scale(1.05);
+    .forgive-btn:hover {
+      background: #ff7b7b;
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #8f3f3f;
     }
 
-    .hearts {
-      position: absolute;
+    .forgive-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 #8f3f3f;
+    }
+
+    .talk-btn {
+      background: #ffb347;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #3e2a1f;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 5px 0 #b4621a;
+      font-family: inherit;
+    }
+
+    .talk-btn:hover {
+      background: #ffc56e;
+      transform: scale(0.97);
+      box-shadow: 0 3px 0 #b4621a;
+    }
+
+    .small-note {
+      font-size: 0.85rem;
+      color: #b47474;
+      margin-top: 20px;
+      border-top: 1px dashed #ffc4c4;
+      padding-top: 16px;
+    }
+
+    /* floating hearts + stars + gentle atmosphere */
+    .floating-elements {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .heart {
+    .soft-particle {
       position: absolute;
-      color: #ff4d6d;
-      animation: fall linear infinite;
+      user-select: none;
+      pointer-events: none;
+      opacity: 0.7;
+      font-size: 1.4rem;
+      animation: floatUpSlow linear infinite;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-10vh); opacity: 1; }
-      100% { transform: translateY(110vh); opacity: 0; }
+    @keyframes floatUpSlow {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.2;
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-20vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* responsive */
+    @media (max-width: 500px) {
+      .apology-card {
+        padding: 1.5rem 1.2rem 2rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .apology-message p {
+        font-size: 0.98rem;
+      }
+      .forgive-btn, .talk-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="hearts"></div>
+<div class="floating-elements" id="floatingContainer"></div>
 
-<div class="card">
-  <div class="emoji">🥺</div>
-  <h1>Don't Worry I am here for you</h1>
-  <p>If you have low mood freely talk to me ❤️</p>
-  <button onclick="forgiveMe()">Forgive Me?</button>
+<div class="apology-card">
+  <div class="mood-icon">🥺💔</div>
+  <h1>I'm truly sorry.</h1>
+  
+  <div class="apology-message">
+    <p>Tashab, 💙<br>
+    I know my behavior wasn't good lately. I was rude, impatient, or maybe just not the friend you deserve. There's no excuse — and I feel terrible about it.</p>
+    
+    <ul class="behavior-list">
+      <li><span>🗣️</span> Saying things without thinking</li>
+      <li><span>😤</span> Acting distant & defensive</li>
+      <li><span>🔇</span> Not listening properly when you needed me</li>
+      <li><span>💢</span> Taking my frustration out on you</li>
+    </ul>
+
+    <div class="promise-text">
+      ✨ I promise to do better. You mean the world to me, and I'll work on being a more caring, patient, and kind friend. ✨
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="forgive-btn" id="forgiveButton">❤️ Forgive Me? ❤️</button>
+    <button class="talk-btn" id="talkButton">💬 Let's talk, I'm here for you</button>
+  </div>
+  <div class="small-note">
+    🌈 No matter what — your feelings are valid. I want to make things right.
+  </div>
 </div>
 
 <script>
-  function forgiveMe() {
-    alert("Yay! Thank you 😭❤️ You're the best!");
-  }
+  (function() {
+    // --- Main apology interaction ---
+    const forgiveBtn = document.getElementById('forgiveButton');
+    const talkBtn = document.getElementById('talkButton');
 
-  // Generate floating hearts
-  const heartsContainer = document.querySelector('.hearts');
-  setInterval(() => {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '❤️';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-    heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+    // Sweet & sincere response for forgiveness
+    forgiveBtn.addEventListener('click', () => {
+      // Create a stylized alert replacement using modern modal? but simple alert works but with warmer style
+      // I'll use a nice floating confirmation + extra heart explosion
+      showFloatingMessage("Thank you for giving me another chance 🥹❤️ You're a true friend!", "#ff6b6b");
+      createConfettiHearts();
+      // Also trigger extra hearts burst
+      burstExtraHearts();
+    });
 
-    heartsContainer.appendChild(heart);
+    // 'talk to me' – active listening invitation
+    talkBtn.addEventListener('click', () => {
+      showFloatingMessage("I'm right here. Tell me what's on your mind — I'm listening without judgement 💬❤️‍🩹", "#ffaa66");
+      createComfortStars();
+    });
 
-    setTimeout(() => {
-      heart.remove();
-    }, 5000);
-  }, 300);
+    // Helper: Show a temporary, gentle tooltip / floating message
+    function showFloatingMessage(msg, bgColor = "#ff8c8c") {
+      // create a temporary div floating on screen
+      const messageDiv = document.createElement('div');
+      messageDiv.innerText = msg;
+      messageDiv.style.position = 'fixed';
+      messageDiv.style.bottom = '25%';
+      messageDiv.style.left = '50%';
+      messageDiv.style.transform = 'translateX(-50%)';
+      messageDiv.style.backgroundColor = bgColor;
+      messageDiv.style.color = 'white';
+      messageDiv.style.padding = '12px 24px';
+      messageDiv.style.borderRadius = '60px';
+      messageDiv.style.fontWeight = 'bold';
+      messageDiv.style.fontSize = '1.1rem';
+      messageDiv.style.fontFamily = "'Segoe UI', 'Comic Neue', cursive";
+      messageDiv.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+      messageDiv.style.zIndex = '999';
+      messageDiv.style.backdropFilter = 'blur(4px)';
+      messageDiv.style.textAlign = 'center';
+      messageDiv.style.maxWidth = '85%';
+      messageDiv.style.border = '1px solid rgba(255,255,255,0.5)';
+      messageDiv.style.pointerEvents = 'none';
+      document.body.appendChild(messageDiv);
+      
+      setTimeout(() => {
+        messageDiv.style.transition = 'opacity 0.5s ease';
+        messageDiv.style.opacity = '0';
+        setTimeout(() => {
+          if (messageDiv && messageDiv.remove) messageDiv.remove();
+        }, 500);
+      }, 2800);
+    }
+
+    // heart explosion effect for forgiveness moment
+    function createConfettiHearts() {
+      const container = document.getElementById('floatingContainer');
+      for (let i = 0; i < 45; i++) {
+        const heartEl = document.createElement('div');
+        heartEl.classList.add('soft-particle');
+        const randomHeart = Math.random() > 0.6 ? '💖' : (Math.random() > 0.5 ? '❤️' : '🌸');
+        heartEl.innerHTML = randomHeart;
+        heartEl.style.left = Math.random() * 100 + '%';
+        heartEl.style.animationDuration = 1.6 + Math.random() * 2 + 's';
+        heartEl.style.fontSize = 18 + Math.random() * 32 + 'px';
+        heartEl.style.opacity = 0.9;
+        heartEl.style.animationDelay = Math.random() * 0.2 + 's';
+        container.appendChild(heartEl);
+        setTimeout(() => {
+          if (heartEl.remove) heartEl.remove();
+        }, 3000);
+      }
+    }
+
+    function burstExtraHearts() {
+      for (let i = 0; i < 28; i++) {
+        const extra = document.createElement('div');
+        extra.classList.add('soft-particle');
+        extra.innerHTML = '✨❤️✨';
+        extra.style.left = Math.random() * 100 + '%';
+        extra.style.animationDuration = 1.2 + Math.random() * 1.8 + 's';
+        extra.style.fontSize = 20 + Math.random() * 26 + 'px';
+        extra.style.opacity = 0.8;
+        const container = document.getElementById('floatingContainer');
+        container.appendChild(extra);
+        setTimeout(() => extra.remove(), 2600);
+      }
+    }
+
+    function createComfortStars() {
+      const container = document.getElementById('floatingContainer');
+      for (let i = 0; i < 40; i++) {
+        const star = document.createElement('div');
+        star.classList.add('soft-particle');
+        star.innerHTML = Math.random() > 0.6 ? '⭐' : (Math.random() > 0.5 ? '🌟' : '💫');
+        star.style.left = Math.random() * 100 + '%';
+        star.style.animationDuration = 2 + Math.random() * 2.5 + 's';
+        star.style.fontSize = 16 + Math.random() * 24 + 'px';
+        star.style.animationDelay = Math.random() * 0.5 + 's';
+        container.appendChild(star);
+        setTimeout(() => star.remove(), 3200);
+      }
+      // extra gentle spoken words floating?
+      const chatBubble = document.createElement('div');
+      chatBubble.innerText = '🤝 "I appreciate you opening up" 🤝';
+      chatBubble.style.position = 'fixed';
+      chatBubble.style.bottom = '15%';
+      chatBubble.style.right = '8%';
+      chatBubble.style.backgroundColor = '#f9e0b0';
+      chatBubble.style.padding = '8px 16px';
+      chatBubble.style.borderRadius = '40px';
+      chatBubble.style.fontWeight = 'bold';
+      chatBubble.style.fontSize = '14px';
+      chatBubble.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+      chatBubble.style.fontFamily = 'inherit';
+      chatBubble.style.zIndex = '999';
+      chatBubble.style.pointerEvents = 'none';
+      document.body.appendChild(chatBubble);
+      setTimeout(() => {
+        chatBubble.style.transition = 'opacity 0.4s';
+        chatBubble.style.opacity = '0';
+        setTimeout(() => chatBubble.remove(), 400);
+      }, 3000);
+    }
+
+    // gentle persistent floating emotes (background serenity)
+    function startGentleFloatingElements() {
+      const container = document.getElementById('floatingContainer');
+      const symbols = ['💙', '🕊️', '🌸', '🌿', '💞', '🤝', '✨', '🍃', '💌'];
+      setInterval(() => {
+        if (document.body && container) {
+          const floating = document.createElement('div');
+          floating.classList.add('soft-particle');
+          const randomSym = symbols[Math.floor(Math.random() * symbols.length)];
+          floating.innerHTML = randomSym;
+          floating.style.left = Math.random() * 100 + '%';
+          floating.style.animationDuration = 11 + Math.random() * 9 + 's';
+          floating.style.fontSize = 14 + Math.random() * 24 + 'px';
+          floating.style.opacity = 0.35;
+          floating.style.animationName = 'floatUpSlow';
+          container.appendChild(floating);
+          setTimeout(() => {
+            if (floating && floating.remove) floating.remove();
+          }, 14000);
+        }
+      }, 1800);
+    }
+    
+    startGentleFloatingElements();
+
+    // also generate a few initial heartfelt hearts on load for sincerity
+    window.addEventListener('load', () => {
+      for (let i=0;i<18;i++) {
+        setTimeout(() => {
+          const initHeart = document.createElement('div');
+          initHeart.classList.add('soft-particle');
+          initHeart.innerHTML = '❤️‍🩹';
+          initHeart.style.left = Math.random() * 100 + '%';
+          initHeart.style.animationDuration = 5 + Math.random() * 5 + 's';
+          initHeart.style.fontSize = 16 + Math.random() * 24 + 'px';
+          initHeart.style.opacity = 0.5;
+          const container = document.getElementById('floatingContainer');
+          if (container) container.appendChild(initHeart);
+          setTimeout(() => initHeart?.remove(), 7000);
+        }, i * 180);
+      }
+    });
+
+    // Additional interactive behavior: If you click somewhere on card it gives virtual hug?
+    const card = document.querySelector('.apology-card');
+    if (card) {
+      card.addEventListener('click', (e) => {
+        // only if not a button clicked, else double effect but fine.
+        if (e.target.tagName !== 'BUTTON') {
+          const hugMsg = document.createElement('div');
+          hugMsg.innerText = '🤗 Sending you a warm hug! 🤗';
+          hugMsg.style.position = 'fixed';
+          hugMsg.style.bottom = '30%';
+          hugMsg.style.left = '50%';
+          hugMsg.style.transform = 'translateX(-50%)';
+          hugMsg.style.backgroundColor = '#f2bc94';
+          hugMsg.style.color = '#4d2f2f';
+          hugMsg.style.padding = '8px 20px';
+          hugMsg.style.borderRadius = '50px';
+          hugMsg.style.fontWeight = 'bold';
+          hugMsg.style.zIndex = '1000';
+          hugMsg.style.fontFamily = 'inherit';
+          hugMsg.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+          hugMsg.style.pointerEvents = 'none';
+          document.body.appendChild(hugMsg);
+          setTimeout(() => {
+            hugMsg.style.transition = 'opacity 0.4s';
+            hugMsg.style.opacity = '0';
+            setTimeout(() => hugMsg.remove(), 400);
+          }, 2000);
+        }
+      });
+    }
+
+    // Just to make it even more meaningful, i add an extra feature: if the user hovers the "Forgive Me" we show promise
+    forgiveBtn.addEventListener('mouseenter', () => {
+      const tooltipPromise = document.createElement('div');
+      tooltipPromise.innerText = '💌 I will never repeat my mistakes.💌';
+      tooltipPromise.style.position = 'absolute';
+      tooltipPromise.style.backgroundColor = '#f5cfcf';
+      tooltipPromise.style.color = '#a14141';
+      tooltipPromise.style.padding = '4px 12px';
+      tooltipPromise.style.borderRadius = '30px';
+      tooltipPromise.style.fontSize = '12px';
+      tooltipPromise.style.fontWeight = 'bold';
+      tooltipPromise.style.bottom = '110%';
+      tooltipPromise.style.left = '50%';
+      tooltipPromise.style.transform = 'translateX(-50%)';
+      tooltipPromise.style.whiteSpace = 'nowrap';
+      tooltipPromise.style.fontFamily = 'inherit';
+      tooltipPromise.style.pointerEvents = 'none';
+      tooltipPromise.style.zIndex = '1010';
+      forgiveBtn.style.position = 'relative';
+      forgiveBtn.appendChild(tooltipPromise);
+      setTimeout(() => {
+        if (tooltipPromise && tooltipPromise.remove) tooltipPromise.remove();
+      }, 1800);
+    });
+    
+    // talk button hover comfort
+    talkBtn.addEventListener('mouseenter', () => {
+      const msgTip = document.createElement('div');
+      msgTip.innerText = '📣 Your feelings are safe with me.';
+      msgTip.style.position = 'absolute';
+      msgTip.style.backgroundColor = '#ffe1b3';
+      msgTip.style.color = '#8b5a2b';
+      msgTip.style.padding = '4px 12px';
+      msgTip.style.borderRadius = '30px';
+      msgTip.style.fontSize = '12px';
+      msgTip.style.bottom = '110%';
+      msgTip.style.left = '50%';
+      msgTip.style.transform = 'translateX(-50%)';
+      msgTip.style.whiteSpace = 'nowrap';
+      msgTip.style.fontFamily = 'inherit';
+      msgTip.style.pointerEvents = 'none';
+      talkBtn.style.position = 'relative';
+      talkBtn.appendChild(msgTip);
+      setTimeout(() => {
+        if (msgTip && msgTip.remove) msgTip.remove();
+      }, 1800);
+    });
+  })();
 </script>
-
 </body>
 </html>
