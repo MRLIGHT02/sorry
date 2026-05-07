@@ -1,362 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sorry My Love</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry 💙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  body {
-    background: #1a0a14;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Lato', sans-serif;
-    overflow-x: hidden;
-    padding: 20px;
-  }
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f0ff 0%, #e8e0f5 30%, #dce3fa 60%, #f0e8f0 100%);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            padding: 20px;
+            background-size: 300% 300%;
+            animation: bgShift 12s ease infinite;
+        }
 
-  .stars {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 0;
-  }
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-  .star {
-    position: absolute;
-    width: 2px; height: 2px;
-    background: #fff;
-    border-radius: 50%;
-    animation: twinkle 3s infinite alternate;
-  }
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-  @keyframes twinkle {
-    0% { opacity: 0.2; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1.4); }
-  }
+        .particle {
+            position: absolute;
+            font-size: 18px;
+            opacity: 0.5;
+            animation: floatUp 10s linear infinite;
+        }
 
-  .petals-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 0; overflow: hidden;
-  }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
 
-  .petal {
-    position: absolute;
-    top: -30px;
-    font-size: 18px;
-    animation: fall linear infinite;
-    opacity: 0.7;
-  }
+        /* Main Card */
+        .card {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(100, 80, 150, 0.2), 0 4px 16px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-  @keyframes fall {
-    0% { transform: translateY(-30px) rotate(0deg); opacity: 0.8; }
-    100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
-  }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 72px rgba(100, 80, 150, 0.28), 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
 
-  .card-wrapper {
-    position: relative; z-index: 10;
-    max-width: 600px; width: 100%;
-  }
+        /* Decorative top border */
+        .card-top-accent {
+            height: 8px;
+            background: linear-gradient(90deg, #c4b5e0 0%, #a8c8f0 40%, #d4b8e0 70%, #b8c8f0 100%);
+            border-radius: 4px 4px 0 0;
+        }
 
-  .card {
-    background: linear-gradient(160deg, #2d0a1f 0%, #1a0a14 60%, #2d0a1f 100%);
-    border: 1px solid rgba(220, 80, 120, 0.3);
-    border-radius: 24px;
-    padding: 50px 45px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 60px rgba(200, 50, 100, 0.15), 0 0 120px rgba(200, 50, 100, 0.05);
-    animation: cardAppear 1s ease-out forwards;
-    opacity: 0;
-    transform: translateY(30px);
-  }
+        /* Inner content */
+        .card-inner {
+            padding: 40px 36px 36px;
+            text-align: center;
+            position: relative;
+        }
 
-  @keyframes cardAppear {
-    to { opacity: 1; transform: translateY(0); }
-  }
+        /* Small decorative hearts top */
+        .top-hearts {
+            margin-bottom: 8px;
+            font-size: 24px;
+            letter-spacing: 6px;
+            animation: gentlePulse 3s ease-in-out infinite;
+        }
 
-  .card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, #dc5078, #ff8fb1, #dc5078, transparent);
-  }
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
 
-  .heart-big {
-    font-size: 56px;
-    display: block;
-    margin-bottom: 20px;
-    animation: heartbeat 1.5s ease-in-out infinite;
-  }
+        .title {
+            font-size: 2rem;
+            font-weight: normal;
+            color: #5b4a7a;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
 
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    14% { transform: scale(1.15); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.1); }
-    56% { transform: scale(1); }
-  }
+        .subtitle {
+            font-size: 1rem;
+            color: #8a7da8;
+            font-style: italic;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
 
-  .sorry-text {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 48px;
-    color: #ff8fb1;
-    letter-spacing: 3px;
-    margin-bottom: 8px;
-    text-shadow: 0 0 30px rgba(255, 143, 177, 0.4);
-    animation: glow 2s ease-in-out infinite alternate;
-  }
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #b8a8d8, #a0b8e8, #c0a8d8, transparent);
+            margin: 0 auto 24px;
+            border-radius: 2px;
+        }
 
-  @keyframes glow {
-    from { text-shadow: 0 0 20px rgba(255, 143, 177, 0.3); }
-    to { text-shadow: 0 0 40px rgba(255, 143, 177, 0.6); }
-  }
+        .message {
+            color: #4a3f60;
+            line-height: 1.9;
+            font-size: 1.05rem;
+            text-align: center;
+            margin-bottom: 28px;
+        }
 
-  .subtitle {
-    font-family: 'Playfair Display', serif;
-    color: #c06080;
-    font-size: 15px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 36px;
-  }
+        .message .highlight {
+            color: #7b6aaa;
+            font-weight: bold;
+            background: rgba(180, 160, 220, 0.15);
+            padding: 2px 8px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
 
-  .divider {
-    width: 80px; height: 1px;
-    background: linear-gradient(90deg, transparent, #dc5078, transparent);
-    margin: 0 auto 36px;
-  }
+        .message .italic-line {
+            font-style: italic;
+            color: #6b5b8a;
+            display: block;
+        }
 
-  .message-block {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(220, 80, 120, 0.15);
-    border-radius: 16px;
-    padding: 28px 30px;
-    margin-bottom: 20px;
-    text-align: left;
-    animation: fadeUp 0.8s ease-out forwards;
-    opacity: 0;
-  }
+        /* Flower / plant decorative line */
+        .floral-line {
+            font-size: 28px;
+            letter-spacing: 9px;
+            color: #c4b8e0;
+            margin-bottom: 20px;
+            user-select: none;
+        }
 
-  .message-block:nth-child(1) { animation-delay: 0.5s; }
-  .message-block:nth-child(2) { animation-delay: 0.8s; }
-  .message-block:nth-child(3) { animation-delay: 1.1s; }
-  .message-block:nth-child(4) { animation-delay: 1.4s; }
+        /* Signature area */
+        .sign-off {
+            color: #5b4a7a;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+        .signature-name {
+            font-family: 'Brush Script MT', 'Dancing Script', 'Georgia', cursive;
+            font-size: 2rem;
+            color: #7b6aaa;
+            letter-spacing: 1px;
+        }
 
-  .message-block .icon {
-    font-size: 20px;
-    margin-bottom: 10px;
-    display: block;
-  }
+        /* Heart at bottom */
+        .bottom-heart {
+            display: inline-block;
+            font-size: 28px;
+            margin-top: 16px;
+            animation: heartBeat 1.4s ease-in-out infinite;
+            cursor: default;
+            user-select: none;
+        }
 
-  .message-block p {
-    color: #d4a0b5;
-    font-size: 15px;
-    line-height: 1.8;
-    font-weight: 300;
-  }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.25); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.2); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
 
-  .message-block .highlight {
-    color: #ff8fb1;
-    font-weight: 400;
-  }
-
-  .love-confession {
-    background: linear-gradient(135deg, rgba(220,80,120,0.12), rgba(150,40,80,0.08));
-    border: 1px solid rgba(220, 80, 120, 0.35);
-    border-radius: 16px;
-    padding: 30px;
-    margin: 28px 0;
-    animation: fadeUp 0.8s ease-out 1.7s forwards;
-    opacity: 0;
-  }
-
-  .love-confession p {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 22px;
-    color: #ff8fb1;
-    line-height: 1.6;
-    text-align: center;
-  }
-
-  .promise-list {
-    list-style: none;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-  }
-
-  .promise-list li {
-    color: #d4a0b5;
-    font-size: 14px;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(220,80,120,0.08);
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-weight: 300;
-    line-height: 1.6;
-  }
-
-  .promise-list li:last-child { border-bottom: none; }
-
-  .promise-list li::before {
-    content: '♡';
-    color: #dc5078;
-    font-size: 12px;
-    margin-top: 3px;
-    flex-shrink: 0;
-  }
-
-  .sign-off {
-    margin-top: 36px;
-    animation: fadeUp 0.8s ease-out 2.2s forwards;
-    opacity: 0;
-  }
-
-  .sign-off p {
-    color: #8a4060;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .sign-off .name {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 28px;
-    color: #ff8fb1;
-  }
-
-  .floating-hearts {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .float-heart {
-    position: absolute;
-    font-size: 14px;
-    opacity: 0;
-    animation: floatUp 4s ease-in-out infinite;
-  }
-
-  @keyframes floatUp {
-    0% { opacity: 0; transform: translateY(0) scale(0.5); }
-    20% { opacity: 0.6; }
-    80% { opacity: 0.3; }
-    100% { opacity: 0; transform: translateY(-200px) scale(1); }
-  }
-</style>
+        /* Soft edges on mobile */
+        @media (max-width: 480px) {
+            .card-inner {
+                padding: 28px 20px 24px;
+            }
+            .title {
+                font-size: 1.6rem;
+            }
+            .message {
+                font-size: 0.95rem;
+                line-height: 1.8;
+            }
+            .signature-name {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="stars" id="stars"></div>
-<div class="petals-container" id="petals"></div>
+    <!-- Floating gentle hearts/flowers -->
+    <div class="particles" id="particles"></div>
 
-<div class="card-wrapper">
-  <div class="card">
+    <!-- The Card -->
+    <div class="card">
+        <div class="card-top-accent"></div>
+        <div class="card-inner">
 
-    <div class="floating-hearts" id="floatingHearts"></div>
+            <!-- Tiny hearts -->
+            <div class="top-hearts">💙 🌸 💙</div>
 
-    <span class="heart-big">💗</span>
+            <!-- Title -->
+            <h1 class="title">I'm Sorry</h1>
+            <p class="subtitle">for being cold when you needed warmth</p>
 
-    <div class="sorry-text">I'm Sorry</div>
-    <div class="subtitle">My Love · Meri Jaan</div>
-    <div class="divider"></div>
+            <div class="divider"></div>
 
-    <div class="message-block">
-      <span class="icon">💬</span>
-      <p>
-        Wo waqt jab tune reply nahi kiya... mujhe pata hai tu busy hogi. 
-        Magar mera dil ghabra gaya aur maine bina soche keh diya ki 
-        <span class="highlight">"tu kisi aur se baat karti hai."</span>
-        Ye mere words galat the. I had no right to say that. I'm truly sorry.
-      </p>
+            <!-- Main message -->
+            <p class="message">
+                <span class="italic-line">I know my replies have been short —<br>sharp around the edges when they shouldn't have been.</span><br><br>
+                Being busy isn't an excuse for being <span class="highlight">cold</span>.<br>
+                I should have been more patient.<br>
+                I should have been softer.<br><br>
+                When you go quiet, I worry.<br>
+                I just want to know what's going on in your world —<br>even if it's just a little line, a tiny window.<br>
+                But I promise to be gentler in asking.<br><br>
+                <span class="italic-line">You deserve my patience, not my haste.<br>
+                You deserve my warmth, not my chill.</span>
+            </p>
+
+            <!-- Floral decoration -->
+            <div class="floral-line">❀ ✿ ❀</div>
+
+            <!-- Sign off -->
+            <p class="sign-off">
+                Always here for you,<br>
+                ready to listen whenever you're ready to share.
+            </p>
+            <div class="signature-name">Yours</div>
+
+            <!-- Beating heart -->
+            <div class="bottom-heart">💙</div>
+
+        </div>
     </div>
 
-    <div class="message-block">
-      <span class="icon">😔</span>
-      <p>
-        Ye sach hai ki <span class="highlight">mere liye time nahi dete ho</span> — 
-        ye baat mujhe andar se hurt karti hai. Magar gusse mein jo bola, 
-        wo mujhe nahi bolna chahiye tha. Tujhe accuse karna bilkul galat tha. 
-        Tujhse maafi maangta hoon, dil se.
-      </p>
-    </div>
+    <script>
+        // Create floating particles (hearts, flowers, sparkles)
+        const particlesContainer = document.getElementById('particles');
+        const emojis = ['🌸', '💙', '✨', '🫧', '💜', '🌿', '✿', '🦋', '💫', '🌷'];
 
-    <div class="love-confession">
-      <p>❝ Main tumse bahut pyaar karta hoon — aur isliye hi itna toot jaata hoon jab tum door lagti ho. ❞</p>
-    </div>
+        function createParticle() {
+            const particle = document.createElement('span');
+            particle.classList.add('particle');
+            particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.fontSize = (Math.random() * 14 + 12) + 'px';
+            particlesContainer.appendChild(particle);
 
-    <div class="message-block">
-      <span class="icon">🤝</span>
-      <p style="font-family: 'Lato', sans-serif; font-size: 14px; color: #b08090; margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase; font-weight: 400;">Mere vaade tujhse:</p>
-      <ul class="promise-list">
-        <li>Pehle baat karunga, accuse nahi — "Mujhe tumse zyada baat karni hai" bolna seekhunga</li>
-        <li>Teri insecurities ko tujh par nahi daalunga — ye meri problem hai, teri nahi</li>
-        <li>Tera busy hona respect karunga — tu apni life ji sakti hai, main samjhunga</li>
-        <li>Jab gussa aaye, cool down karke baat karunga — reactive nahi badunga</li>
-        <li>Apni zaroorat seedha bolunga — bina drama ke, bina ilaazam ke</li>
-      </ul>
-    </div>
+            // Remove particle after animation ends
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 16000);
+        }
 
-    <div class="sign-off">
-      <p>Always & forever yours</p>
-      <div class="name">Tera apna 💕</div>
-    </div>
+        // Create initial particles
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createParticle, i * 400);
+        }
 
-  </div>
-</div>
+        // Keep creating new ones
+        setInterval(createParticle, 2500);
+    </script>
 
-<script>
-  const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 80; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.left = Math.random() * 100 + '%';
-    s.style.top = Math.random() * 100 + '%';
-    s.style.animationDelay = Math.random() * 3 + 's';
-    s.style.animationDuration = (2 + Math.random() * 3) + 's';
-    starsEl.appendChild(s);
-  }
-
-  const petalsEl = document.getElementById('petals');
-  const petalEmojis = ['🌸', '🌺', '🌹', '💮'];
-  for (let i = 0; i < 12; i++) {
-    const p = document.createElement('div');
-    p.className = 'petal';
-    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDelay = (Math.random() * 8) + 's';
-    p.style.animationDuration = (6 + Math.random() * 6) + 's';
-    p.style.fontSize = (12 + Math.random() * 10) + 'px';
-    petalsEl.appendChild(p);
-  }
-
-  const fh = document.getElementById('floatingHearts');
-  const hEmojis = ['💗', '💖', '💓', '❤️', '🩷'];
-  for (let i = 0; i < 8; i++) {
-    const h = document.createElement('div');
-    h.className = 'float-heart';
-    h.textContent = hEmojis[Math.floor(Math.random() * hEmojis.length)];
-    h.style.left = (10 + Math.random() * 80) + '%';
-    h.style.bottom = (Math.random() * 20) + '%';
-    h.style.animationDelay = (Math.random() * 5) + 's';
-    h.style.animationDuration = (3 + Math.random() * 3) + 's';
-    fh.appendChild(h);
-  }
-</script>
 </body>
 </html>
