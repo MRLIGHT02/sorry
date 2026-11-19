@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Am Truly Sorry • From the Bottom of My Heart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #faf6f0;
+      --bg-card: rgba(255, 255, 255, 0.82);
+      --rose-soft: #f8e8e6;
+      --rose-deep: #d47b7b;
+      --blush-accent: #e29578;
+      --text-main: #2b2727;
+      --text-muted: #6e6565;
+      --gold-accent: #c69b6d;
+      --shadow-soft: 0 14px 35px rgba(184, 142, 142, 0.14);
+      --shadow-hover: 0 20px 45px rgba(184, 142, 142, 0.22);
+      --border-subtle: rgba(212, 123, 123, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    /* Ambient Canvas for Floating Petals */
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Decorative background glowing gradients */
+    .bg-glow-1 {
+      position: fixed;
+      top: -150px;
+      left: -100px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(248, 232, 230, 0.85) 0%, rgba(250, 246, 240, 0) 70%);
+      filter: blur(50px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-glow-2 {
+      position: fixed;
+      bottom: -120px;
+      right: -80px;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(235, 210, 203, 0.75) 0%, rgba(250, 246, 240, 0) 70%);
+      filter: blur(60px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Top Sound & Action Bar */
+    .action-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-main);
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.28s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    }
+
+    .pill-btn:hover {
+      transform: translateY(-2px);
+      background: #ffffff;
+      border-color: var(--rose-deep);
+      box-shadow: 0 6px 20px rgba(212, 123, 123, 0.2);
+    }
+
+    .pill-btn.active {
+      background: var(--rose-soft);
+      border-color: var(--rose-deep);
+      color: var(--rose-deep);
+    }
+
+    .sound-wave {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      height: 14px;
+    }
+
+    .sound-wave span {
+      width: 2.5px;
+      height: 100%;
+      background: var(--rose-deep);
+      border-radius: 3px;
+      animation: soundWave 1.2s infinite ease-in-out;
+    }
+
+    .sound-wave span:nth-child(2) { animation-delay: 0.2s; height: 60%; }
+    .sound-wave span:nth-child(3) { animation-delay: 0.4s; height: 80%; }
+    .sound-wave span:nth-child(4) { animation-delay: 0.1s; height: 40%; }
+
+    @keyframes soundWave {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1); }
+    }
+
+    /* Hero / Header Section */
+    .hero {
+      text-align: center;
+      padding: 40px 15px 30px;
+    }
+
+    .hero-pretitle {
+      display: inline-block;
+      font-family: 'Sacramento', cursive;
+      font-size: 2.2rem;
+      color: var(--rose-deep);
+      margin-bottom: 2px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.5rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    /* Divider */
+    .floral-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 36px 0;
+      color: var(--gold-accent);
+      opacity: 0.85;
+    }
+
+    .floral-divider::before,
+    .floral-divider::after {
+      content: '';
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--gold-accent), transparent);
+    }
+
+    /* Photos Section: Polaroid Gallery */
+    .photos-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin: 25px 0 50px;
+      padding: 0 10px;
+    }
+
+    .polaroid-card {
+      background: #ffffff;
+      padding: 16px 16px 24px;
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .polaroid-card:first-child {
+      transform: rotate(-1.8deg);
+    }
+
+    .polaroid-card:last-child {
+      transform: rotate(1.8deg);
+    }
+
+    .polaroid-card:hover {
+      transform: rotate(0deg) translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .photo-pin {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 22px;
+      background: radial-gradient(circle at 35% 35%, #ffd5cd 0%, #d47b7b 100%);
+      border-radius: 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.22);
+      border: 2px solid #fff;
+      z-index: 5;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      height: 380px;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #f0ebe4;
+      position: relative;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+
+    .polaroid-card:hover .image-wrapper img {
+      transform: scale(1.04);
+    }
+
+    .caption {
+      margin-top: 16px;
+      text-align: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--text-main);
+    }
+
+    .caption-sub {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-style: normal;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* The Sincere Letter Card */
+    .letter-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 44px 40px;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .letter-card::before {
+      content: '“';
+      position: absolute;
+      top: 10px;
+      left: 28px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 7rem;
+      color: var(--rose-deep);
+      opacity: 0.12;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .letter-header {
+      margin-bottom: 24px;
+    }
+
+    .letter-tag {
+      display: inline-block;
+      background: var(--rose-soft);
+      color: var(--rose-deep);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .letter-salutation {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .letter-body {
+      font-size: 1.05rem;
+      color: #3e3838;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .letter-body p {
+      line-height: 1.85;
+    }
+
+    .highlight-text {
+      background: linear-gradient(120deg, rgba(248, 232, 230, 0.6) 0%, rgba(248, 232, 230, 0) 100%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      color: #2b2727;
+    }
+
+    .letter-signature {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: gap;
+    }
+
+    .sign-off {
+      font-family: 'Sacramento', cursive;
+      font-size: 2.4rem;
+      color: var(--rose-deep);
+      line-height: 1;
+    }
+
+    .sign-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Section: What I Truly Value & Promises */
+    .promises-section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.1rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .promises-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .promise-item {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .promise-item:hover {
+      transform: translateY(-4px);
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(212, 123, 123, 0.12);
+      border-color: var(--rose-deep);
+    }
+
+    .promise-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--rose-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+    }
+
+    .promise-heading {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .promise-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Cute & Lovely Lines Section */
+    .cute-section {
+      margin-bottom: 48px;
+    }
+
+    .cute-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .cute-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid rgba(248, 232, 230, 0.9);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cute-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--rose-deep), var(--blush-accent));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cute-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--rose-deep);
+    }
+
+    .cute-card:hover::before {
+      opacity: 1;
+    }
+
+    .cute-badge {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .cute-card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .cute-card-text {
+      font-size: 0.92rem;
+      color: #554d4d;
+      line-height: 1.65;
+    }
+
+    /* Interactive "A Flower of Peace" Card */
+    .peace-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 232, 230, 0.5) 100%);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 40px;
+    }
+
+    .peace-card h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.8rem;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .peace-card p {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+
+    .interactive-btn {
+      background: linear-gradient(135deg, var(--rose-deep) 0%, #c46868 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 34px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(212, 123, 123, 0.35);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .interactive-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(212, 123, 123, 0.45);
+    }
+
+    .interactive-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Modal / Popup for the Secret Note */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(43, 39, 39, 0.4);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 24px;
+      max-width: 500px;
+      width: 100%;
+      padding: 36px 30px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+      position: relative;
+      transform: translateY(20px) scale(0.95);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      animation: heartbeat 2s infinite ease-in-out;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .modal-text {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .close-modal-btn {
+      background: var(--rose-soft);
+      color: var(--rose-deep);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 10px 28px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .close-modal-btn:hover {
+      background: var(--rose-deep);
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px 15px 10px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    footer .heart {
+      color: var(--rose-deep);
+      display: inline-block;
+      margin: 0 2px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .container {
+        padding: 24px 16px 60px;
+      }
+      .letter-card {
+        padding: 30px 22px;
+      }
+      .image-wrapper {
+        height: 320px;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .polaroid-card:first-child,
+      .polaroid-card:last-child {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Effects -->
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Falling Blossom Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <div class="container">
+
+    <!-- Top Action Bar -->
+    <div class="action-bar">
+      <button id="music-toggle" class="pill-btn" title="Toggle Soft Calming Chimes">
+        <span id="music-icon">🎵</span>
+        <span id="music-text">Play Soft Melody</span>
+        <div id="sound-indicator" class="sound-wave" style="display: none;">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </button>
+      <button id="petals-toggle" class="pill-btn" title="Toggle Floating Petals">
+        🌸 <span>Petals</span>
+      </button>
+    </div>
+
+    <!-- Header Section -->
+    <header class="hero">
+      <div class="hero-pretitle">A heartfelt message for you</div>
+      <h1 class="hero-title">I Am Truly, Deeply Sorry</h1>
+      <p class="hero-subtitle">
+        Your feelings matter, your comfort is sacred, and our bond means more to me than words can ever describe.
+      </p>
+    </header>
+
+    <div class="floral-divider">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+      </svg>
+      <span>✦</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    </div>
+
+    <!-- Polaroid Photo Memories -->
+    <section class="photos-showcase">
+      <!-- Photo 1 -->
+      <div class="polaroid-card">
+        <div class="photo-pin"></div>
+        <div class="image-wrapper">
+          <img src="WhatsApp Image 2026-11-18 at 12.13.57 PM (1).jpeg" onerror="this.onerror=null; this.src='photo1.jpeg';" alt="A cherished memory of you" loading="lazy">
+        </div>
+        <div class="caption">
+          The Cutest Person to Me ✨
+          <span class="caption-sub">After seeing you, my whole day becomes happy</span>
+        </div>
+      </div>
+
+      <!-- Photo 2 -->
+      <div class="polaroid-card">
+        <div class="photo-pin"></div>
+        <div class="image-wrapper">
+          <img src="WhatsApp Image 2026-11-18 at 12.13.57 PM.jpeg" onerror="this.onerror=null; this.src='photo2.jpeg';" alt="Your beautiful presence" loading="lazy">
+        </div>
+        <div class="caption">
+          My Favorite Notification 📱
+          <span class="caption-sub">A reminder of warmth, light & joy</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Heartfelt Apology Letter -->
+    <article class="letter-card">
+      <div class="letter-header">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <span class="letter-tag">Unconditional Apology</span>
+          <button id="edit-name-btn" style="background: rgba(255,255,255,0.7); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; cursor: pointer; color: var(--text-muted); display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s;">
+            ✏️ <span>Personalize Her Name</span>
+          </button>
+        </div>
+        <h2 class="letter-salutation">To <span id="recipient-name">My Dearest Closest Friend</span>,</h2>
+      </div>
+
+      <div class="letter-body">
+        <p>
+          I am writing this because what I said to you was completely wrong, thoughtless, and inappropriate. I hurt your feelings, I crossed an uncomfortable line, and hearing that I made you feel uneasy or disrespected cuts straight to my heart.
+        </p>
+
+        <p>
+          I want to be completely honest with no excuses: <span class="highlight-text">You had every right to be angry and hurt.</span> What I blurted out was disrespectful of our bond and of the safe space we share. When someone is your closest friend, their dignity, comfort, and peace of mind should always come first — and in that moment, I failed you.
+        </p>
+
+        <p>
+          Please know that my intention was never to make you feel uncomfortable, sexualized, or objectified. But I know that intent does not erase the impact. What matters is how my words made you feel, and I take full accountability for crossing that boundary.
+        </p>
+
+        <p>
+          I want you to know the genuine truth: <span class="highlight-text">You are easily the cutest, most special person to me.</span> You are my absolute favorite notification on my phone — every single time I see your name pop up, my whole face lights up with a smile. After seeing you or hearing your voice, my whole day becomes happy, no matter what went wrong before.
+        </p>
+
+        <p>
+          That is why hurting you hurts me so much. You bring so much joy, sweet laughter, and comfort into my life, and the very last thing I ever want in this world is for you to feel distant, guarded, or uneasy around me.
+        </p>
+
+        <p>
+          I don't expect you to simply brush this off, and you do not owe me instant forgiveness. Please take all the time and space you need. I just wanted you to hear, with all my heart, that I am deeply sorry, and I promise to be the friend who treats you with the pure respect and honor you deserve.
+        </p>
+      </div>
+
+      <div class="letter-signature">
+        <div>
+          <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 4px;">With genuine remorse & respect,</div>
+          <div class="sign-off">Yours Always, As Your Friend</div>
+        </div>
+        <div class="sign-date">Forever Cherishing Our Friendship</div>
+      </div>
+
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(212, 123, 123, 0.12); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <button id="copy-apology-btn" class="pill-btn" style="font-size: 0.82rem; padding: 7px 16px; background: rgba(255,255,255,0.95);">
+          📋 <span>Copy Apology Note for WhatsApp / Message</span>
+        </button>
+        <span id="copy-toast" style="display: none; font-size: 0.82rem; color: #2e7d32; font-weight: 600; background: #e8f5e9; padding: 3px 12px; border-radius: 999px;">✓ Apology message copied to clipboard!</span>
+      </div>
+    </article>
+
+    <!-- Cute & Lovely Lines Section -->
+    <section class="cute-section">
+      <div style="text-align: center; margin-bottom: 28px;">
+        <span class="letter-tag" style="background: rgba(226, 149, 120, 0.18); color: #c46868;">Sweet Little Truths</span>
+        <h2 class="section-title">Why You Make My World So Bright</h2>
+        <p class="section-desc">A few heartfelt reminders of the joy, cuteness, and happiness you bring to my life:</p>
+      </div>
+
+      <div class="cute-grid">
+        <div class="cute-card">
+          <div class="cute-badge">💖</div>
+          <h3 class="cute-card-title">The Cutest Person To Me</h3>
+          <p class="cute-card-text">
+            From your adorable smile to your natural kindness, you are effortlessly the cutest person in my eyes. Nobody compares.
+          </p>
+        </div>
+
+        <div class="cute-card">
+          <div class="cute-badge">📱</div>
+          <h3 class="cute-card-title">My Favorite Notification</h3>
+          <p class="cute-card-text">
+            Out of every message on my phone, yours is always the one I look forward to the most. Seeing your name pop up instantly makes me smile.
+          </p>
+        </div>
+
+        <div class="cute-card">
+          <div class="cute-badge">☀️</div>
+          <h3 class="cute-card-title">My Whole Day Becomes Happy</h3>
+          <p class="cute-card-text">
+            It only takes one look at you, or hearing you laugh, to turn any bad or stressful day into a happy, beautiful one.
+          </p>
+        </div>
+
+        <div class="cute-card">
+          <div class="cute-badge">🌸</div>
+          <h3 class="cute-card-title">Purest & Sweetest Soul</h3>
+          <p class="cute-card-text">
+            Your warmth, innocence, and caring nature make you irreplaceable. You have a heart of gold that deserves nothing but genuine respect.
+          </p>
+        </div>
+
+        <div class="cute-card">
+          <div class="cute-badge">🧸</div>
+          <h3 class="cute-card-title">My Safe Haven</h3>
+          <p class="cute-card-text">
+            Talking to you feels like coming home after a long storm. Your presence brings an effortless peace and comfort like no one else can.
+          </p>
+        </div>
+
+        <div class="cute-card">
+          <div class="cute-badge">✨</div>
+          <h3 class="cute-card-title">One in a Million</h3>
+          <p class="cute-card-text">
+            You are a rare, beautiful soul in this world. Having you as my closest friend is a blessing I will always protect and cherish.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promises & Commitments -->
+    <section class="promises-section">
+      <h2 class="section-title">My Promises to You</h2>
+      <p class="section-desc">Actions matter far more than words. Here is what you can always count on from me:</p>
+
+      <div class="promises-grid">
+        <div class="promise-item">
+          <div class="promise-icon">🛡️</div>
+          <h3 class="promise-heading">Honoring Your Boundaries</h3>
+          <p class="promise-text">Your comfort zone will always be respected without question, hesitation, or compromise.</p>
+        </div>
+
+        <div class="promise-item">
+          <div class="promise-icon">🤝</div>
+          <h3 class="promise-heading">A Safe, Trusted Space</h3>
+          <p class="promise-text">To never make you feel guarded, uneasy, or awkward around me ever again.</p>
+        </div>
+
+        <div class="promise-item">
+          <div class="promise-icon">👂</div>
+          <h3 class="promise-heading">Listening Without Defensiveness</h3>
+          <p class="promise-text">To always listen to your feelings, validate your truth, and never make cheap excuses for my faults.</p>
+        </div>
+
+        <div class="promise-item">
+          <div class="promise-icon">🕊️</div>
+          <h3 class="promise-heading">Patience & No Pressure</h3>
+          <p class="promise-text">To give you all the space you need, whenever you need it, with absolute patience and care.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Gentle Note -->
+    <div class="peace-card">
+      <div style="font-size: 2.2rem; margin-bottom: 8px;">🤍</div>
+      <h3>Whenever You Are Ready</h3>
+      <p>
+        Even if you need silence right now, I wanted you to have a gentle reminder of how truly special you are to me.
+      </p>
+      <button id="open-note-btn" class="interactive-btn">
+        <span>✨ Open A Little Reminder</span>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Made with sincere remorse, deep respect, and care <span class="heart">♥</span> for my best friend.</p>
+      <p style="margin-top: 6px; font-size: 0.8rem; color: #a59b9b;">Take care of yourself, always.</p>
+    </footer>
+
+  </div>
+
+  <!-- Pop-up Note Modal -->
+  <div id="note-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-icon">💖</div>
+      <h3 class="modal-title">You Deserve Only Sunshine</h3>
+      <p class="modal-text">
+        "To me, you are easily the cutest person, the brightest presence, and my absolute favorite notification. Just seeing your smile can turn my whole day into pure happiness. You deserve only kindness, comfort, and the deepest respect. Whenever you feel ready to talk, I am right here with an open, caring heart."
+      </p>
+      <button id="close-modal-btn" class="close-modal-btn">Thank You</button>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+       1. WEB AUDIO API - SOOTHING AMBIENT MUSIC BOX (OFFLINE)
+       Generates gentle, dreamy acoustic chimes with zero external audio files.
+       ========================================================= */
+    let audioCtx = null;
+    let isPlaying = false;
+    let melodyInterval = null;
+
+    const musicBtn = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    const musicText = document.getElementById('music-text');
+    const soundIndicator = document.getElementById('sound-indicator');
+
+    // Pentatonic soothing frequencies (C4, D4, E4, G4, A4, C5, D5, E5, G5)
+    const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
+    const chords = [
+      [261.63, 329.63, 392.00], // C major
+      [220.00, 261.63, 329.63], // A minor
+      [174.61, 261.63, 349.23], // F major
+      [196.00, 246.94, 293.66]  // G major
+    ];
+
+    function playChime(freq, time, duration = 2.2, gainLevel = 0.08) {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, time);
+
+      // Natural acoustic bell/music box envelope
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(gainLevel, time + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(time);
+      osc.stop(time + duration);
+    }
+
+    let chordStep = 0;
+    function playMelodyStep() {
+      if (!audioCtx || !isPlaying) return;
+      const now = audioCtx.currentTime;
+      const currentChord = chords[chordStep % chords.length];
+
+      // Play soft bass pad
+      currentChord.forEach((freq, idx) => {
+        playChime(freq * 0.5, now + (idx * 0.12), 3.5, 0.035);
+      });
+
+      // Play soft chime melody note
+      const randomNote = notes[Math.floor(Math.random() * notes.length)];
+      playChime(randomNote, now + 0.35, 2.5, 0.07);
+
+      if (Math.random() > 0.4) {
+        const secondNote = notes[Math.floor(Math.random() * notes.length)];
+        playChime(secondNote, now + 0.95, 2.0, 0.05);
+      }
+
+      chordStep++;
+    }
+
+    function toggleAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      isPlaying = !isPlaying;
+
+      if (isPlaying) {
+        musicBtn.classList.add('active');
+        musicIcon.textContent = '⏸';
+        musicText.textContent = 'Soothing Chimes Playing';
+        soundIndicator.style.display = 'inline-flex';
+        playMelodyStep();
+        melodyInterval = setInterval(playMelodyStep, 2200);
+      } else {
+        musicBtn.classList.remove('active');
+        musicIcon.textContent = '🎵';
+        musicText.textContent = 'Play Soft Melody';
+        soundIndicator.style.display = 'none';
+        clearInterval(melodyInterval);
+      }
+    }
+
+    musicBtn.addEventListener('click', toggleAudio);
+
+    /* =========================================================
+       2. FLOATING PETALS CANVAS ANIMATION
+       ========================================================= */
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+    let petalsActive = true;
+    let petals = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height;
+        this.size = Math.random() * 9 + 7;
+        this.speedY = Math.random() * 1.1 + 0.7;
+        this.speedX = Math.sin(Math.random() * Math.PI) * 0.8 - 0.4;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = (Math.random() - 0.5) * 1.5;
+        this.opacity = Math.random() * 0.45 + 0.3;
+        this.color = Math.random() > 0.4 ? 'rgba(235, 170, 175,' : 'rgba(244, 205, 200,';
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.008) + this.speedX;
+        this.rotation += this.rotationSpeed;
+
+        if (this.y > canvas.height + 20) {
+          this.reset();
+          this.y = -20;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.fillStyle = this.color + this.opacity + ')';
+        ctx.beginPath();
+        // Draw petal teardrop shape
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(this.size / 2, -this.size / 2, this.size, 0, 0, this.size * 1.5);
+        ctx.bezierCurveTo(-this.size, 0, -this.size / 2, -this.size / 2, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 28; i++) {
+      petals.push(new Petal());
+      petals[i].y = Math.random() * canvas.height; // Distribute initially across screen
+    }
+
+    function animatePetals() {
+      if (petalsActive) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        petals.forEach(p => {
+          p.update();
+          p.draw();
+        });
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+
+    const petalsToggle = document.getElementById('petals-toggle');
+    petalsToggle.addEventListener('click', () => {
+      petalsActive = !petalsActive;
+      petalsToggle.classList.toggle('active', petalsActive);
+      petalsToggle.innerHTML = petalsActive ? '🌸 <span>Petals</span>' : '⚪ <span>Petals Off</span>';
+    });
+
+    /* =========================================================
+       3. MODAL POPUP & GENTLE INTERACTION
+       ========================================================= */
+    const openNoteBtn = document.getElementById('open-note-btn');
+    const closeNoteBtn = document.getElementById('close-modal-btn');
+    const noteModal = document.getElementById('note-modal');
+
+    function openModal() {
+      noteModal.classList.add('open');
+      // Create a gentle burst of petals around the modal
+      for (let i = 0; i < 15; i++) {
+        const p = new Petal();
+        p.x = window.innerWidth / 2 + (Math.random() - 0.5) * 300;
+        p.y = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
+        petals.push(p);
+      }
+    }
+
+    function closeModal() {
+      noteModal.classList.remove('open');
+    }
+
+    openNoteBtn.addEventListener('click', openModal);
+    closeNoteBtn.addEventListener('click', closeModal);
+    noteModal.addEventListener('click', (e) => {
+      if (e.target === noteModal) closeModal();
+    });
+
+    /* =========================================================
+       4. RECIPIENT NAME CUSTOMIZATION
+       ========================================================= */
+    const editNameBtn = document.getElementById('edit-name-btn');
+    const recipientNameEl = document.getElementById('recipient-name');
+
+    // Load saved name from localStorage if available
+    try {
+      const savedName = localStorage.getItem('sorry_friend_name');
+      if (savedName) {
+        recipientNameEl.textContent = savedName;
+      }
+    } catch(e) {}
+
+    editNameBtn.addEventListener('click', () => {
+      const current = recipientNameEl.textContent;
+      const defaultVal = current === 'My Dearest Closest Friend' ? '' : current;
+      const newName = prompt("Enter her name to personalize the letter:", defaultVal);
+      if (newName && newName.trim()) {
+        const trimmed = newName.trim();
+        recipientNameEl.textContent = trimmed;
+        try {
+          localStorage.setItem('sorry_friend_name', trimmed);
+        } catch(e) {}
+      }
+    });
+
+    /* =========================================================
+       5. COPY APOLOGY TEXT TO CLIPBOARD
+       ========================================================= */
+    const copyBtn = document.getElementById('copy-apology-btn');
+    const copyToast = document.getElementById('copy-toast');
+
+    copyBtn.addEventListener('click', () => {
+      const name = recipientNameEl.textContent;
+      const apologyText = `Dear ${name},\n\nI am writing to you because what I said earlier was completely thoughtless, wrong, and out of line. I hurt your feelings and made you uncomfortable, and I feel deeply remorseful for that.\n\nYou had every right to be angry with me. I have zero excuses. The honest truth is that you are easily the cutest person to me and my absolute favorite notification in the world. Just seeing your smile or hearing from you makes my whole day happy, and hurting someone who brings so much sunshine into my life breaks my heart.\n\nYour comfort, your boundaries, and your dignity will always come first. Please take all the time and space you need. I just wanted to say from the bottom of my heart that I am truly, deeply sorry, and I will always cherish and respect you.`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(apologyText).then(() => {
+          showCopySuccess();
+        }).catch(() => fallbackCopy(apologyText));
+      } else {
+        fallbackCopy(apologyText);
+      }
+    });
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showCopySuccess();
+      } catch(err) {}
+      document.body.removeChild(ta);
+    }
+
+    function showCopySuccess() {
+      copyToast.style.display = 'inline-block';
+      setTimeout(() => {
+        copyToast.style.display = 'none';
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
